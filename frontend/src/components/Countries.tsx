@@ -18,19 +18,21 @@ export default function Countries() {
 
   const [countryName, setCountryName] = useState('');
   const [countryEmoji, setCountryEmoji] = useState('');
-  const [continentCode, setContinentCode] = useState('');  
+  const [continentCode, setContinentCode] = useState('');
 
   const [addCountryMutation, { data, loading, error: mutationError }] =
-    useMutation<{ item: CountryTypes }>(addCountry);
+    useMutation<{ item: CountryTypes }>(addCountry, {
+      refetchQueries: [{ query: queryCountries }],
+    });
 
   const handlePost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!countryName || !countryEmoji || !continentCode) {
       return;
     }
-    
+
     const id = parseInt(continentCode, 10);
-    
+
     try {
       await addCountryMutation({
         variables: {
