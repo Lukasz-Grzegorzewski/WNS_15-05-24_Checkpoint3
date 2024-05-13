@@ -20,13 +20,17 @@ export default function Countries() {
   const [countryEmoji, setCountryEmoji] = useState('');
   const [continentCode, setContinentCode] = useState('');  
 
-  const [addCountryMutation, { data, loading, error: mutationError }] = useMutation<{item: CountryTypes}>(addCountry);
+  const [addCountryMutation, { data, loading, error: mutationError }] =
+    useMutation<{ item: CountryTypes }>(addCountry);
+
   const handlePost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!countryName || !countryEmoji || !continentCode) {
-      alert('Please fill all fields');
       return;
     }
+    
+    const id = parseInt(continentCode, 10);
+    
     try {
       await addCountryMutation({
         variables: {
@@ -34,9 +38,9 @@ export default function Countries() {
             code: countryName.slice(0, 3).toUpperCase(),
             name: countryName,
             emoji: countryEmoji,
-            continent: continentCode,
-          }
-        }
+            continent: { id },
+          },
+        },
       });
       alert('Country added successfully!');
       setCountryName('');
@@ -46,7 +50,6 @@ export default function Countries() {
       console.error('Error adding country:', err);
       alert('Failed to add country');
     }
-
   };
 
   return (
@@ -68,7 +71,10 @@ export default function Countries() {
             value={countryEmoji}
             onChange={(e) => setCountryEmoji(e.target.value)}
           />
-          <select value={continentCode} onChange={(e) => setContinentCode(e.target.value)}>
+          <select
+            value={continentCode}
+            onChange={(e) => setContinentCode(e.target.value)}
+          >
             <option value=''>Code</option>
             {continents.map((continent) => {
               return (

@@ -10,7 +10,6 @@ export default function CountryDetail() {
     variables: { code },
   });
   const country = data ? data.item : null;
-  console.log('data', data);
 
   return (
     data &&

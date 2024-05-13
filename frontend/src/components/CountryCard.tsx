@@ -2,7 +2,6 @@ import { CountryTypes } from '@/types';
 import Link from 'next/link';
 
 function CountryCard({ country }: { country: CountryTypes }) {
-  console.log('country', country);
   
   return (
     <Link
