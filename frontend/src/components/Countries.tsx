@@ -89,7 +89,7 @@ export default function Countries() {
           <button>Add</button>
         </form>
       </div>
-      <div className='flex flex-row justify-center p-10 gap-5'>
+      <div className='flex flex-row flex-wrap justify-center p-10 gap-5'>
         {countries.map((country) => {
           return (
             <div key={country.id}>
