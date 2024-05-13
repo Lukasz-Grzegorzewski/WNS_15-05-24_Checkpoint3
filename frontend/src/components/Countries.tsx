@@ -58,7 +58,7 @@ export default function Countries() {
     <div className='flex flex-col justify-center items-center pt-10'>
       <div className='p-5 bg-red-100 shadow-lg'>
         <h2 className='text-center pb-7'>Add new country</h2>
-        <form className='flex gap-5' onSubmit={handlePost}>
+        <form className='flex gap-5 flex-wrap' onSubmit={handlePost}>
           <input
             className='p-3'
             type='text'
